@@ -1,0 +1,22 @@
+plugins {
+    id 'module-config'
+    id 'spring-conventions'
+}
+
+dependencies {
+    implementation project(":common")
+    implementation project(':boundedContextA')
+    implementation project(':boundedContextB')
+    implementation project(':boundedContextC')
+
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+}
+
+repositories {
+    mavenCentral()
+}

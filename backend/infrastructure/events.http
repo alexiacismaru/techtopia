@@ -1,0 +1,214 @@
+# Get access token with normal user
+POST http://localhost:8180/realms/techtopiaRealm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=techtopia-backend&client_secret=LbaPHLYLKLo6LnpQzETx27zyFUDXBF9G&username=admin&password=admin&grant_type=password&scope=openid
+> {%
+client.global.set("access_token", response.body.access_token);
+%}
+
+###
+POST http://localhost:8093/api/gate/0
+Content-Type: application/json
+
+[
+  "db6e93a8-18cb-4a9a-998d-43f111cbadb1"
+
+]
+
+###
+POST http://localhost:8091/api/ticket
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "ticketType": "0",
+  "ageGroup": "0",
+  "startDate": "2023-10-31",
+  "endDate": "2023-10-31"
+}
+
+###
+GET http://localhost:8093/api/attractions
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8093/api/attractions/1
+Authorization: Bearer {{access_token}}
+
+###
+POST http://localhost:8093/api/addAttraction
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Mini Roller coaster",
+  "description": "Take a ride on the mini roller coaster.",
+  "tags": "thrill",
+  "ageGroup": "All ages",
+  "image": "https://img.freepik.com/free-vector/roller-coaster-concept-illustration_114360-19426.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+POST http://localhost:8093/api/addAttraction
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Water Ride",
+  "description": "Take a ride on the water train and see the landscape.",
+  "tags": "relax",
+  "ageGroup": "Children",
+  "image": "https://img.freepik.com/free-vector/hand-drawn-rafting-illustration_23-2150085516.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+POST http://localhost:8093/api/addAttraction
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Xtreme Ride",
+  "description": "Take a ride on the xtreme ride.",
+  "tags": "thrill",
+  "ageGroup": "Adults",
+  "image": "https://img.freepik.com/free-vector/kids-rollercoaster-rides-boy-girl-riding-fast-rollercoaster_33099-175.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+POST http://localhost:8093/api/addAttraction
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Boat Cruz",
+  "description": "Relax on a boat ride.",
+  "tags": "relax",
+  "ageGroup": "Adults",
+  "image": "https://img.freepik.com/free-vector/canoeing-concept-illustration_114360-5832.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+POST http://localhost:8093/api/addAttraction
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Water Slides",
+  "description": "Have fun on the water slides.",
+  "tags": "relax",
+  "ageGroup": "Adults",
+  "image": "https://img.freepik.com/free-vector/amazing-aqua-park-adult-kid-recreation-cheerful-family-children-riding-from-slide-pipe-tube-tablet_575670-1471.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+POST http://localhost:8093/api/addAttraction
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Mining Ride",
+  "description": "Take a ride inside the mountain.",
+  "tags": "thrill",
+  "ageGroup": "All ages",
+  "image": "https://img.freepik.com/free-vector/ski-station-design-with-lift_23-2147720385.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+POST http://localhost:8093/api/addAttraction
+Content-type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Twister",
+  "description": "Have fun on the twister.",
+  "tags": "thrill",
+  "ageGroup": "Children",
+  "image": "https://img.freepik.com/free-vector/children-ride-roller-coaster-sky_1308-55734.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+#DELETE http://localhost:8093/api/attractions/1
+#Content-Type: application/json
+#Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8093/api/refreshmentStands
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+###
+POST http://localhost:8093/api/addRefreshmentStand
+Content-type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Souvenir Shops",
+  "isOpen": false,
+  "image":"https://img.freepik.com/free-vector/shop-giveaway-concept-illustration_114360-7815.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+POST http://localhost:8093/api/addRefreshmentStand
+Content-type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Hiking Trail",
+  "isOpen": false,
+  "image": "https://img.freepik.com/free-vector/man-with-backpack-stands-cliff-top-looking-mountain-trail-climbing-trekking-hiking-walking-adventures-nature_575670-1141.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+POST http://localhost:8093/api/addRefreshmentStand
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Relaxation Tent",
+  "isOpen": false,
+  "image": "https://img.freepik.com/free-vector/swimming-pool-hotel-poolside-equipment-set_107791-11939.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=sph"
+}
+
+###
+POST http://localhost:8093/api/addRefreshmentStand
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Parking Lot",
+  "isOpen": false,
+  "image": "https://img.freepik.com/free-vector/car-parking-top-view-composition-with-outdoor-scenery-with-green-trees-marked-asphalt-with-cars_1284-55560.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+POST http://localhost:8093/api/addRefreshmentStand
+Content-type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Beach Resort",
+  "isOpen": false,
+  "image": "https://img.freepik.com/free-vector/leisure-tropical-resort-cartoon-vector_33099-1389.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+POST http://localhost:8093/api/addRefreshmentStand
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Food Court",
+  "isOpen": false,
+  "image": "https://img.freepik.com/free-vector/restaurant-interior-with-people-sitting-tables-waiters-serving-food-drinks-isometric_1284-60634.jpg?size=626&ext=jpg&ga=GA1.1.1195544508.1698874428&semt=ais"
+}
+
+###
+DELETE http://localhost:8093/api/refreshentStands/1
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8093/api/attractions/tags/thrill
+Content-Type: application/json
+Authorization: Bearer {{access_token}}

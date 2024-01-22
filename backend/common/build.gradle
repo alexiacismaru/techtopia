@@ -1,0 +1,8 @@
+plugins {
+    id 'module-config'
+}
+
+dependencies {
+    implementation 'org.projectlombok:lombok:1.18.28'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+}

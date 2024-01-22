@@ -1,0 +1,33 @@
+plugins {
+    id 'module-config'
+}
+
+dependencies {
+    implementation project(':common')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.0.3'
+    implementation 'org.springframework.cloud:spring-cloud-circuitbreaker-resilience4j:3.0.2'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation 'com.tngtech.archunit:archunit-junit5:1.1.0'
+    testImplementation "org.testcontainers:junit-jupiter:1.19.1"
+    testImplementation group: 'org.testcontainers', name: 'mysql', version: '1.19.1'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+}
+
+
+repositories {
+    mavenCentral()
+}

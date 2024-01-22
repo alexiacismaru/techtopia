@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  mysql_app_db:
+    image: mysql:8.1.0
+    restart: no
+    environment:
+      MYSQL_DATABASE: 'app_db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    networks:
+      - backend
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+
+  app_rabbitmq:
+    image: rabbitmq:3-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=myuser
+      - RABBITMQ_DEFAULT_PASS=mypassword
+    ports:
+      - "5672:5672" #AMQP
+      - "15672:15672" #MGMT
+    networks:
+      - backend
+    volumes:
+      - ./rabbitmq/data/:/var/lib/rabbitmq/
+      - ./rabbitmq/log/:/var/log/rabbitmq/
+
+
+  external_forecast:
+    image: ksmeyers/forecast-service:latest
+    ports:
+      - "9090:8080"
+    networks:
+      - backend
+
+
+
+  idp_mysql:
+    image: mysql:8.1.0
+    volumes:
+      - ./idp_mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+    ports:
+      - '3307:3306'
+    networks:
+      - kc
+
+  idp_keycloak:
+    image: quay.io/keycloak/keycloak:22.0.1
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=mysql
+      - KC_DB_URL_HOST=idp_mysql
+      - KC_DB_URL_DATABASE=keycloak
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=password
+    command: start-dev
+    ports:
+      - "8180:8080"
+    depends_on:
+      - idp_mysql
+    networks:
+      - kc
+
+
+networks:
+  kc:
+    name: kc-network
+    driver: bridge
+  backend:
+    name: back-network
+    driver: bridge
