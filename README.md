@@ -15,7 +15,7 @@ Security is ensured by using KeyCloak. First, I created the Docker image of the 
 ## Installation
 1. Clone the repo
    ```
-   git clone https://github.com/alecsiuh/techtopia.git
+   git clone https://github.com/alexiacismaru/techtopia.git
    ```
 2. Install dependencies
    ```
