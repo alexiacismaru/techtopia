@@ -1,12 +1,14 @@
 # Techtopia 
 
-This project covers bounded contexts in programming by building the backend of a ticketing system and the front end using React.
+This project covers bounded contexts in programming by building the backend and front end of a ticketing system using React.
+
+**Medium article**: https://medium.com/@alexia.csmr/using-bounded-contexts-to-build-a-java-application-1c7995038d30.
 
 ## About the project
 
 The goal is to create a ticketing system for an amusement park called Techtopia. It's made out of the backend component using a hexagonal architecture, and the front end is created in React and TypeScript. The project has 3 main bounded contexts: Tickets, Attractions, and Entrance Gates. Each bounded context has its directory and includes components like in and our ports, adapters, use cases, etc.
 
-Security is ensured by using KeyCloak. First, I created the Docker image of the Java project, then created the realm and client. On the React app, I used KeyCloak to log in to the website.
+Using KeyCloak ensures security. First, I created the Docker image of the Java project, then the realm and client. I used KeyCloak to log in to the website on the React app.
 
 ## Features
 - **Hexagonal Architecture**: the application is designed around domain logic to isolate it from external factors.
